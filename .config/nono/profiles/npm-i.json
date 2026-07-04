@@ -1,0 +1,38 @@
+{
+  "extends": ["default"],
+  "meta": {
+    "name": "npm-i",
+    "version": "0.0.0",
+    "description": "Изолированная установка npm-зависимостей: без записи в .git, без доступа к секретам хоста, сеть только к реестру"
+  },
+  "groups": {
+    "include": [
+      "node_runtime",
+      "deny_credentials",
+      "deny_shell_history",
+      "deny_shell_configs",
+      "unlink_protection",
+      "dangerous_commands",
+      "dangerous_commands_linux",
+      "dangerous_commands_macos"
+    ]
+  },
+  "workdir": {
+    "access": "read"
+  },
+  "filesystem": {
+    "write": [
+      "$HOME/.npm",
+      "$WORKDIR/node_modules"
+    ],
+    "write_file": [
+      "$WORKDIR/package.json",
+      "$WORKDIR/package-lock.json"
+    ]
+  },
+  "network": {
+    "allow_domain": [
+      "registry.npmjs.org"
+    ]
+  }
+}
